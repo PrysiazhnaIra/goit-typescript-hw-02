@@ -50,7 +50,7 @@ function App() {
     fetchImages();
   }, [query, page]);
 
-  const handleSearch = (searchQuery: string) => {
+  const handleSearch = (searchQuery: string): void => {
     setQuery((prevQuery) => {
       if (searchQuery != prevQuery) {
         setPage(1);
@@ -60,15 +60,15 @@ function App() {
     });
   };
 
-  const loadMoreImages = () => {
+  const loadMoreImages = (): void => {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const openModal = (image: UnsplashImage) => {
+  const openModal = (image: UnsplashImage): void => {
     setSelectedImage(image);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setSelectedImage(null);
   };
 

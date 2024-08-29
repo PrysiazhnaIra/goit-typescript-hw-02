@@ -25,7 +25,7 @@ export interface ImageModalProps {
   isOpen: boolean;
   onClose: () => void;
   bigImage: string;
-  imageDescription?: string;
+  imageDescription?: string | null;
 }
 
 export interface LoadMoreBtnProps {
