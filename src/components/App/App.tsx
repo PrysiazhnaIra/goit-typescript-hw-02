@@ -8,24 +8,27 @@ import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import axios from "axios";
 import ImageModal from "../ImageModal/ImageModal";
 import Modal from "react-modal";
+import { UnsplashImage } from "../../types";
 
 Modal.setAppElement("#root");
 
 function App() {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [images, setImages] = useState<UnsplashImage[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>("");
+  const [selectedImage, setSelectedImage] = useState<UnsplashImage | null>(
+    null
+  );
 
   useEffect(() => {
     if (!query) return;
 
-    async function fetchImages() {
+    async function fetchImages(): Promise<void> {
       try {
         setLoading(true);
-        const response = await axios.get(
+        const response = await axios.get<{ results: UnsplashImage[] }>(
           "https://api.unsplash.com/search/photos",
           {
             params: {
@@ -47,7 +50,7 @@ function App() {
     fetchImages();
   }, [query, page]);
 
-  const handleSearch = (searchQuery) => {
+  const handleSearch = (searchQuery: string) => {
     setQuery((prevQuery) => {
       if (searchQuery != prevQuery) {
         setPage(1);
@@ -61,7 +64,7 @@ function App() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const openModal = (image) => {
+  const openModal = (image: UnsplashImage) => {
     setSelectedImage(image);
   };
 
@@ -72,7 +75,7 @@ function App() {
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
-      <Toaster position="top-lef" reverseOrder={false} />
+      <Toaster position="top-left" reverseOrder={false} />
       {error && (
         <p>Whoops, something went wrong! Please try reloading this page!</p>
       )}

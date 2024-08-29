@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import css from "./SearchBar.module.css";
 import toast from "react-hot-toast";
+import { SearchBarProps } from "../../types";
 
-export default function SearchBar({ onSubmit }) {
-  const [query, setQuery] = useState("");
+export default function SearchBar({ onSubmit }: SearchBarProps) {
+  const [query, setQuery] = useState<string>("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (query.trim() === "") {
       toast("Please enter a search query!", {

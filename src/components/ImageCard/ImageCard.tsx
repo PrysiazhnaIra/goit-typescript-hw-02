@@ -1,6 +1,7 @@
 import css from "./ImageCard.module.css";
+import { ImageCardProps } from "../../types";
 
-export default function ImageCard({ image, openModal }) {
+export default function ImageCard({ image, openModal }: ImageCardProps) {
   const { urls, alt_description, user, likes } = image;
   return (
     <li className={css.item} onClick={() => openModal(image)}>

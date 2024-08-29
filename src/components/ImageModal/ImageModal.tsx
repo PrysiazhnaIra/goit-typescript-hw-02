@@ -1,5 +1,6 @@
 import css from "./ImageModal.module.css";
 import Modal from "react-modal";
+import { ImageModalProps } from "../../types";
 
 const customStyles = {
   content: {
@@ -22,7 +23,7 @@ export default function ImageModal({
   onClose,
   bigImage,
   imageDescription,
-}) {
+}: ImageModalProps) {
   return (
     <div>
       <Modal
