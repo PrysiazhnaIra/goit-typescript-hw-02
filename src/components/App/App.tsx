@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import "./App.module.css";
+import css from "./App.module.css";
 import SearchBar from "../SearchBar/SearchBar";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
@@ -9,6 +9,7 @@ import axios from "axios";
 import ImageModal from "../ImageModal/ImageModal";
 import Modal from "react-modal";
 import { UnsplashImage } from "../../types";
+import { CiFaceFrown } from "react-icons/ci";
 
 Modal.setAppElement("#root");
 
@@ -39,8 +40,13 @@ function App() {
             },
           }
         );
-        console.log(response);
-        setImages((prevImages) => [...prevImages, ...response.data.results]);
+        if (response.data.results.length === 0) {
+          toast("No results found! Please try another search query.", {
+            icon: <CiFaceFrown style={{ fontSize: "50px" }} />,
+          });
+        } else {
+          setImages((prevImages) => [...prevImages, ...response.data.results]);
+        }
       } catch (error) {
         setError(true);
       } finally {
@@ -77,7 +83,9 @@ function App() {
       <SearchBar onSubmit={handleSearch} />
       <Toaster position="top-left" reverseOrder={false} />
       {error && (
-        <p>Whoops, something went wrong! Please try reloading this page!</p>
+        <p className={css.errorText}>
+          Whoops, something went wrong! Please try reloading this page!
+        </p>
       )}
       {images.length > 0 && (
         <ImageGallery images={images} openModal={openModal} />
