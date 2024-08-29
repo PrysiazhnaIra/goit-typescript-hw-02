@@ -1,7 +1,7 @@
 .btn {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #c69915;
+  background-color: #771bda72;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -13,14 +13,14 @@
 
 .btn:hover,
 .btn:focus {
-  background-color: #957514;
+  background-color: #771bdacb;
   outline: none;
 }
 
 .btnBlock {
   display: flex;
   justify-content: center;
-  background-color: #da9e1b96;
+  background-color: #771bda47;
   margin-top: 20px;
   margin-bottom: 20px;
 }
